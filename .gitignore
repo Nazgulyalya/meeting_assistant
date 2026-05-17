@@ -4,4 +4,8 @@ __pycache__/
 .chroma/
 chroma_db/
 *.egg-info/
-.DS_Store
+.DS_Store 
+credentials.json
+token_gmail.pickle
+token_calendar.pickle
+logs/

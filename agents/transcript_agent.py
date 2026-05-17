@@ -90,3 +90,15 @@ class TranscriptAgent:
             if phrase in lower:
                 text = text.replace(phrase, "[REDACTED]")
         return text
+    
+    def transcribe_audio(self, audio_path: str) -> str:
+        """Convert audio file to raw transcript using Whisper."""
+        import whisper
+        model = whisper.load_model("base")  # base = 74MB, быстро
+        result = model.transcribe(audio_path)
+        return result["text"]
+
+    def process_audio(self, audio_path: str) -> TranscriptOutput:
+        """Full pipeline: audio → raw text → cleaned transcript."""
+        raw_text = self.transcribe_audio(audio_path)
+        return self.process(raw_text)

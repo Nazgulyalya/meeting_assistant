@@ -1,5 +1,6 @@
 from dotenv import load_dotenv
 import os
+import json
 load_dotenv()
 
 from langchain_groq import ChatGroq
@@ -9,15 +10,28 @@ from typing import List, Optional
 
 class ActionItem(BaseModel):
     task: str
-    owner: str          # "Unknown" если не указан
-    deadline: str       # "Not specified" если не указан
-    priority: str       # "High" / "Medium" / "Low"
-    confidence: float   # 0.0 - 1.0
+    owner: str = "Unknown"
+    deadline: str = "Not specified"
+    priority: str = "Medium"
+    confidence: float = 1.0
 
 class Decision(BaseModel):
-    decision: str
+    decision: str = ""
     rationale: str = ""
     participants: List[str] = []
+
+    @classmethod
+    def from_raw(cls, data: dict) -> "Decision":
+        decision = (data.get("decision") or data.get("title") or
+                    data.get("summary") or data.get("description") or "")
+        participants = data.get("participants") or data.get("involved") or []
+        if isinstance(participants, str):
+            participants = [p.strip() for p in participants.split(",")]
+        return cls(
+            decision=decision,
+            rationale=data.get("rationale", ""),
+            participants=participants
+        )
 
 class OpenQuestion(BaseModel):
     question: str
@@ -45,9 +59,11 @@ Extract the following from the transcript:
 
 Rules:
 - If owner is unclear, use "Unknown"
-- If deadline is unclear, use "Not specified"  
+- If deadline is unclear, use "Not specified"
 - Confidence < 0.7 means it's inferred, not explicit
 - Count words per speaker from "Speaker X:" labels
+- For decisions, always use the field name "decision" (not "title" or "summary")
+- For decisions participants, always use a list of strings
 
 Return ONLY a valid JSON object. No text outside the JSON."""),
     ("human", """Meeting transcript:
@@ -72,7 +88,6 @@ class ActionAgent:
             "memory_context": memory_context or "No past context available."
         })
 
-        import json
         text = response.content.strip()
         if text.startswith("```"):
             text = text.split("```")[1]
@@ -80,13 +95,34 @@ class ActionAgent:
                 text = text[4:]
         data = json.loads(text)
 
-        # Если модель вернула participation_stats как dict — конвертируем в list
+        # Нормализуем decisions
+        if "decisions" in data:
+            data["decisions"] = [Decision.from_raw(d) for d in data["decisions"]]
+
+        # Нормализуем open_questions — иногда модель возвращает строки
+        if "open_questions" in data:
+            normalized_q = []
+            for q in data["open_questions"]:
+                if isinstance(q, str):
+                    normalized_q.append({"question": q, "raised_by": "Unknown"})
+                elif isinstance(q, dict):
+                    normalized_q.append({
+                        "question": q.get("question", ""),
+                        "raised_by": q.get("raised_by") or q.get("asker") or "Unknown"
+                    })
+            data["open_questions"] = normalized_q
+
+        # Нормализуем participation_stats — иногда word_count float
         stats = data.get("participation_stats", [])
         if isinstance(stats, dict):
             total = sum(stats.values()) or 1
             data["participation_stats"] = [
-                {"speaker": k, "word_count": v, "talk_time_pct": round(v / total * 100, 1)}
+                {"speaker": k, "word_count": int(v), "talk_time_pct": round(v / total * 100, 1)}
                 for k, v in stats.items()
             ]
+        elif isinstance(stats, list):
+            for s in stats:
+                if "word_count" in s:
+                    s["word_count"] = int(s["word_count"])
 
         return ActionOutput(**data)

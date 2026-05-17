@@ -1,3 +1,6 @@
+from utils.logger import get_logger
+logger = get_logger("orchestrator")
+
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -33,7 +36,7 @@ synthesis_agent = SynthesisAgent()
 vector_store = MeetingVectorStore()
 
 def run_transcript(state: MeetingState) -> MeetingState:
-    print("🎙️  Transcript Agent running...")
+    logger.info("🎙️  Transcript Agent running...")
     try:
         result = transcript_agent.process(state["raw_input"])
         return {**state, "transcript": result, "status": "transcript_done"}
@@ -41,7 +44,7 @@ def run_transcript(state: MeetingState) -> MeetingState:
         return {**state, "error": str(e), "status": "failed"}
 
 def run_memory(state: MeetingState) -> MeetingState:
-    print("🧠  Memory Agent running...")
+    logger.info("🧠  Memory Agent running...")
     try:
         transcript_text = state["transcript"].cleaned_transcript
         result = memory_agent.process(transcript_text)
@@ -50,7 +53,7 @@ def run_memory(state: MeetingState) -> MeetingState:
         return {**state, "error": str(e), "status": "failed"}
 
 def run_action(state: MeetingState) -> MeetingState:
-    print("✅  Action Agent running...")
+    logger.info("✅  Action Agent running...")
     try:
         transcript_text = state["transcript"].cleaned_transcript
         memory_context = state["memory"].relevant_context if state["memory"] else ""
@@ -60,7 +63,7 @@ def run_action(state: MeetingState) -> MeetingState:
         return {**state, "error": str(e), "status": "failed"}
 
 def run_synthesis(state: MeetingState) -> MeetingState:
-    print("📝  Synthesis Agent running...")
+    logger.info("📝  Synthesis Agent running...")
     try:
         transcript_text = state["transcript"].cleaned_transcript
         memory_context = state["memory"].relevant_context if state["memory"] else ""
@@ -71,7 +74,7 @@ def run_synthesis(state: MeetingState) -> MeetingState:
 
 def save_to_memory(state: MeetingState) -> MeetingState:
     """Save this meeting to ChromaDB for future RAG retrieval."""
-    print("💾  Saving to memory...")
+    logger.info("💾  Saving to memory...")
     try:
         vector_store.add_meeting(
             meeting_id=state["meeting_id"],
@@ -84,7 +87,7 @@ def save_to_memory(state: MeetingState) -> MeetingState:
         return {**state, "status": "completed"}
     except Exception as e:
         # Non-critical — продолжаем даже если сохранение упало
-        print(f"Warning: could not save to memory: {e}")
+        logger.info(f"Warning: could not save to memory: {e}")
         return {**state, "status": "completed"}
 
 # --- Routing ---
