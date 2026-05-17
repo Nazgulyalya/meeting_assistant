@@ -61,19 +61,20 @@ class TranscriptAgent:
 
         response = self.chain.invoke({"raw_transcript": sanitized})
 
-        # Parse JSON from response
+        # Parse JSON from response — robust extraction
         import json
+        text = response.content.strip()
+
+        # Найти позицию первой {
+        start = text.find("{")
+        if start == -1:
+            raise ValueError(f"No JSON found in response. Raw: {response.content[:300]}")
+
         try:
-            # Убираем возможные markdown backticks если модель их добавила
-            text = response.content.strip()
-            if text.startswith("```"):
-                text = text.split("```")[1]
-                if text.startswith("json"):
-                    text = text[4:]
-            data = json.loads(text)
+            data, _ = json.JSONDecoder().raw_decode(text[start:])
             return TranscriptOutput(**data)
         except Exception as e:
-            raise ValueError(f"Failed to parse agent response: {e}\nRaw: {response.content}")
+            raise ValueError(f"Failed to parse agent response: {e}\nRaw: {response.content[:500]}")
 
     def _sanitize_input(self, text: str) -> str:
         """Basic input sanitization against prompt injection."""

@@ -9,11 +9,21 @@ from pydantic import BaseModel
 from typing import List, Optional
 
 class ActionItem(BaseModel):
-    task: str
+    task: str = ""
     owner: str = "Unknown"
     deadline: str = "Not specified"
     priority: str = "Medium"
     confidence: float = 1.0
+
+    @classmethod
+    def from_raw(cls, data: dict) -> "ActionItem":
+        return cls(
+            task=data.get("task") or data.get("description") or data.get("action") or "",
+            owner=data.get("owner") or data.get("assignee") or "Unknown",
+            deadline=data.get("deadline") or data.get("due") or "Not specified",
+            priority=data.get("priority") or "Medium",
+            confidence=float(data.get("confidence", 1.0))
+        )
 
 class Decision(BaseModel):
     decision: str = ""
@@ -29,7 +39,7 @@ class Decision(BaseModel):
             participants = [p.strip() for p in participants.split(",")]
         return cls(
             decision=decision,
-            rationale=data.get("rationale", ""),
+            rationale=data.get("rationale") or "",
             participants=participants
         )
 
@@ -43,10 +53,10 @@ class ParticipationStat(BaseModel):
     talk_time_pct: float
 
 class ActionOutput(BaseModel):
-    action_items: List[ActionItem]
-    decisions: List[Decision]
-    open_questions: List[OpenQuestion]
-    participation_stats: List[ParticipationStat]
+    action_items: List[ActionItem] = []
+    decisions: List[Decision] = []
+    open_questions: List[OpenQuestion] = []
+    participation_stats: List[ParticipationStat] = []
 
 ACTION_PROMPT = ChatPromptTemplate.from_messages([
     ("system", """You are an Action Extraction Agent for meeting transcripts.
@@ -95,9 +105,20 @@ class ActionAgent:
                 text = text[4:]
         data = json.loads(text)
 
+        # Гарантируем что все списки есть
+        for key in ["action_items", "decisions", "open_questions", "participation_stats"]:
+            if key not in data or data[key] is None:
+                data[key] = []
+
+        # Нормализуем action_items
+        if "action_items" in data:
+            data["action_items"] = [ActionItem.from_raw(a) for a in data["action_items"]]
+
+        
         # Нормализуем decisions
         if "decisions" in data:
             data["decisions"] = [Decision.from_raw(d) for d in data["decisions"]]
+            
 
         # Нормализуем open_questions — иногда модель возвращает строки
         if "open_questions" in data:
