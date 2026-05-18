@@ -105,3 +105,26 @@ def test_full_pipeline():
     assert result["synthesis"] is not None
     assert result["synthesis"].executive_summary
     assert result["synthesis"].email_body
+
+
+import os, glob
+
+AUDIO_DIR = os.path.join(os.path.dirname(__file__), "data")
+AUDIO_FILES = glob.glob(os.path.join(AUDIO_DIR, "*.mp3")) if os.path.isdir(AUDIO_DIR) else []
+
+@pytest.mark.skipif(not AUDIO_FILES, reason="No audio files in tests/data/")
+@pytest.mark.parametrize("audio_path", AUDIO_FILES)
+def test_whisper_transcribes_audio(audio_path):
+    """Each .mp3 in tests/data/ → Whisper → non-empty transcript."""
+    agent = TranscriptAgent()
+    raw = agent.transcribe_audio(audio_path)
+    assert raw and len(raw.strip()) > 10, f"Empty transcript for {os.path.basename(audio_path)}"
+
+@pytest.mark.skipif(not AUDIO_FILES, reason="No audio files in tests/data/")
+@pytest.mark.parametrize("audio_path", AUDIO_FILES)
+def test_audio_to_structured_output(audio_path):
+    """Full audio pipeline for each file."""
+    agent = TranscriptAgent()
+    result = agent.process_audio(audio_path)
+    assert result.cleaned_transcript
+    assert result.language

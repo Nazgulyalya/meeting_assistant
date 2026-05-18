@@ -1,0 +1,35 @@
+{
+  "aggregate": {
+    "relevance": 4.33,
+    "completeness": 4.0,
+    "accuracy": 5.0,
+    "format_quality": 5.0,
+    "overall": 4.58
+  },
+  "details": [
+    {
+      "id": "eval_1",
+      "relevance": 5,
+      "completeness": 4,
+      "accuracy": 5,
+      "format_quality": 5,
+      "comment": "The output effectively captures the key points from the transcript, but misses the specific deadline for shipping the new payments feature."
+    },
+    {
+      "id": "eval_2",
+      "relevance": 4,
+      "completeness": 4,
+      "accuracy": 5,
+      "format_quality": 5,
+      "comment": "The output effectively captures the key points from the transcript, but slightly misses the weak password policy and session timeout issues in the action items and decisions sections."
+    },
+    {
+      "id": "eval_3",
+      "relevance": 4,
+      "completeness": 4,
+      "accuracy": 5,
+      "format_quality": 5,
+      "comment": "The output effectively captures the key points from the transcript, but slightly misses the context of Competitor X's cheaper tier launch in May."
+    }
+  ]
+}

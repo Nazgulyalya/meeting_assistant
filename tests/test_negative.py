@@ -2,7 +2,7 @@
 import pytest
 from agents.transcript_agent import TranscriptAgent
 from agents.action_agent import ActionAgent
-from mcp.gmail_client import send_email
+from mcp_client.client import send_email_via_mcp as send_email
 
 
 # --- Empty / invalid input ---

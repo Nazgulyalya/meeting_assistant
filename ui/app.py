@@ -102,14 +102,37 @@ if "result" in st.session_state:
 
     # --- Tab 2: Action Items ---
     with tab2:
-        st.subheader("Action Items")
-        if actions.action_items:
-            for item in actions.action_items:
-                color = {"High": "🔴", "Medium": "🟡", "Low": "🟢"}.get(item.priority, "⚪")
-                conf = f"(confidence: {int(item.confidence * 100)}%)" if item.confidence < 0.8 else ""
-                st.markdown(f"{color} **{item.task}**  \n👤 {item.owner} | 📅 {item.deadline} {conf}")
-        else:
-            st.info("No action items found.")
+        st.subheader("✅ Action Items")
+        st.caption("Edit any field below — your changes will be used in the email draft.")
+
+        if "edited_actions" not in st.session_state:
+            st.session_state["edited_actions"] = [
+                {"task": a.task, "owner": a.owner, "deadline": a.deadline,
+                "priority": a.priority, "confidence": a.confidence}
+                for a in actions.action_items
+            ]
+
+        edited = []
+        for i, item in enumerate(st.session_state["edited_actions"]):
+            with st.expander(f"📌 {item['task'][:60]}", expanded=False):
+                c1, c2 = st.columns(2)
+                with c1:
+                    task = st.text_input("Task", value=item["task"], key=f"task_{i}")
+                    owner = st.text_input("Owner", value=item["owner"], key=f"owner_{i}")
+                with c2:
+                    deadline = st.text_input("Deadline", value=item["deadline"], key=f"deadline_{i}")
+                    priority = st.selectbox("Priority", ["High", "Medium", "Low"],
+                        index=["High", "Medium", "Low"].index(item["priority"])
+                            if item["priority"] in ["High", "Medium", "Low"] else 1,
+                        key=f"priority_{i}")
+                edited.append({
+                    "task": task, "owner": owner, "deadline": deadline,
+                    "priority": priority, "confidence": item["confidence"]
+                })
+
+        if st.button("💾 Save edits", key="save_edits"):
+            st.session_state["edited_actions"] = edited
+            st.success("Edits saved! Email draft will use these values.")
 
         st.divider()
         st.subheader("Decisions Made")
@@ -158,6 +181,13 @@ if "result" in st.session_state:
                     st.markdown(f"- **{t['name']}**: {t['description'][:80]}")
             except Exception as e:
                 st.error(f"MCP connection error: {e}")
+
+        if "edited_actions" in st.session_state:
+            edited_str = "\n".join([
+                f"- {a['task']} → {a['owner']} by {a['deadline']} [{a['priority']}]"
+                for a in st.session_state["edited_actions"]
+            ])
+            st.info(f"Using {len(st.session_state['edited_actions'])} edited action items")
 
         st.text_input("Subject", value=synthesis.email_subject, key="email_subject")
         email_body = st.text_area("Body", value=synthesis.email_body, height=300, key="email_body")

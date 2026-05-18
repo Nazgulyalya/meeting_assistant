@@ -70,6 +70,29 @@ Measured on a hand-curated evaluation set of 10 queries with ground truth meetin
 
 Run yourself: `python evals/rag_eval.py`
 
+
+## 🎯 Output Quality (LLM-as-Judge)
+
+Evaluated on 3 sample transcripts, scored 1-5 across 4 dimensions:
+
+| Dimension | Score |
+|---|---|
+| Relevance | 4.33 / 5 |
+| Completeness | 4.0 / 5 |
+| Accuracy | 5.0 / 5 |
+| Format Quality | 5.0 / 5 |
+| **Overall** | **4.58 / 5** |
+
+Run yourself: `python evals/output_quality_eval.py`
+
+## ⚡ Performance
+
+| Metric | Value |
+|---|---|
+| Avg end-to-end latency | 12.54s over 3 runs |
+| Cost per pipeline run | $0.00 (Groq free tier) |
+| Tokens per run | ~3300 (visible in LangSmith) |
+
 ## 🚀 Quick Start
 
 ### 1. Clone and install
@@ -145,18 +168,23 @@ meeting-assistant/
 | UI | Streamlit |
 | Tests | pytest |
 
-## 📊 Why This Beats Commercial Tools
+## 📊 Differentiation from Commercial Tools
 
-| Feature | Otter.ai | Fireflies | This System |
-|---|---|---|---|
-| Transcription | ✅ | ✅ | ✅ |
-| Action item extraction | ✅ | ✅ | ✅ |
-| Cross-meeting context (RAG) | ❌ | ❌ | ✅ |
-| Contradiction detection | ❌ | ❌ | ✅ |
-| Participation stats | Partial | Partial | ✅ |
-| PII anonymization | ❌ | ❌ | ✅ |
-| Local-first / private | ❌ | ❌ | ✅ |
-| Open source | ❌ | ❌ | ✅ |
+Commercial tools like Otter.ai and Fireflies cover transcription and basic action item extraction well. This system focuses on **gaps** they don't address:
+
+| Capability | Commercial Tools | This System |
+|---|---|---|
+| Audio transcription | ✅ Production-grade | ✅ Whisper-based |
+| Action item extraction | ✅ Mature | ✅ With confidence scores |
+| Cross-meeting RAG memory | ❌ Not in core product | ✅ Built-in |
+| Contradiction detection vs past decisions | ❌ Manual | ✅ Automated flagging |
+| Participation balance analytics | Partial (in some tiers) | ✅ Always shown |
+| Local-first / no cloud dependency | ❌ Cloud-only | ✅ Local Whisper + ChromaDB |
+| User-editable action items with re-export | ✅ | ✅ |
+| Self-hosted MCP integration | ❌ | ✅ Custom MCP server |
+| Open source extensibility | ❌ | ✅ Apache 2.0 |
+
+This is not a competitor — it's a complementary system that adds team memory and integration flexibility to existing transcription workflows.
 
 ## 📜 License
 MIT

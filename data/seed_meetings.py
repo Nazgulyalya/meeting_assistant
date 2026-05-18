@@ -447,6 +447,54 @@ Speaker A: We'll add this to security training for all engineers.
 
 ]
 
+# --- REAL PUBLIC-DOMAIN TRANSCRIPTS ---
+import os
+REAL_DIR = os.path.join(os.path.dirname(__file__), "real_meetings")
+
+REAL_MEETINGS = [
+    {
+        "id": "real_fed_press_2026_01_28",
+        "domain": "finance",
+        "date": "2026-01-28",
+        "title": "Federal Reserve Press Conference - Powell",
+        "source": "public_domain",
+        "file": "fed_press_2026_01_28.txt",
+    },
+    {
+        "id": "real_un_ministerial_2023",
+        "domain": "government",
+        "date": "2023-04-01",
+        "title": "UN Ministerial Roundtable - Science & Innovation",
+        "source": "public_domain",
+        "file": "un_ministerial_2023.txt",
+    },
+    {
+        "id": "real_ted_supreme_court",
+        "domain": "legal",
+        "date": "2025-11-01",
+        "title": "TED Talk - Supreme Court Case Argument",
+        "source": "public_domain",
+        "file": "ted_supreme_court.txt",
+    },
+]
+
+for m in REAL_MEETINGS:
+    path = os.path.join(REAL_DIR, m["file"])
+    if os.path.exists(path):
+        with open(path, "r", encoding="utf-8") as f:
+            text = f.read()
+        store.add_meeting(
+            meeting_id=m["id"],
+            transcript=text,
+            metadata={
+                "date": m["date"],
+                "title": m["title"],
+                "domain": m["domain"],
+                "source": m["source"],
+            }
+        )
+        print(f"✅ Loaded real public-domain transcript: {m['id']}")
+
 print(f"Loading {len(MEETINGS)} meetings into ChromaDB...")
 for m in MEETINGS:
     store.add_meeting(

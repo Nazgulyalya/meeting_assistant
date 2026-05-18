@@ -1,0 +1,7 @@
+{
+  "avg_latency_sec": 12.54,
+  "min_latency_sec": 2.67,
+  "max_latency_sec": 26.73,
+  "runs": 3,
+  "cost_per_run_usd": 0.0
+}

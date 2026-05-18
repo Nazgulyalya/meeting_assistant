@@ -123,8 +123,14 @@ def build_graph():
 # Глобальный граф — импортируем в UI
 meeting_graph = build_graph()
 
+from utils.cache import get_cached, set_cached
+
 # --- Главная функция ---
 def process_meeting(raw_transcript: str) -> MeetingState:
+    cached = get_cached(raw_transcript)
+    if cached:
+        print("💾 Cache hit — returning cached result")
+        return cached
     initial_state: MeetingState = {
         "raw_input": raw_transcript,
         "meeting_id": f"meeting_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{uuid.uuid4().hex[:6]}",
@@ -136,4 +142,6 @@ def process_meeting(raw_transcript: str) -> MeetingState:
         "status": "started"
     }
     result = meeting_graph.invoke(initial_state)
+    if result.get("error") is None:
+        set_cached(raw_transcript, result)
     return result
