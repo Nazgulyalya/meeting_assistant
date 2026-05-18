@@ -227,6 +227,224 @@ Speaker B: I'll book venue by June 20th.
 Speaker C: Agenda focuses on strategy alignment and team bonding.
 """
     },
+
+    # --- LEGAL / COMPLIANCE ---
+    {
+        "id": "legal_2024_02_10_gdpr_review",
+        "domain": "legal",
+        "date": "2024-02-10",
+        "title": "GDPR Compliance Review",
+        "text": """
+Speaker A: Annual GDPR review. Status check on data handling.
+Speaker B: User data retention policy is current. 24 month maximum.
+Speaker C: We had two data subject access requests last quarter, both fulfilled within deadline.
+Speaker A: Decision: implement automated DSAR workflow by end of Q2.
+Speaker B: Privacy policy needs update for new analytics vendor.
+Speaker A: Anna handles privacy policy update by March 15th.
+"""
+    },
+    {
+        "id": "legal_2024_03_20_contract_template",
+        "domain": "legal",
+        "date": "2024-03-20",
+        "title": "Vendor Contract Template Update",
+        "text": """
+Speaker A: Our vendor contract template is 4 years old. Time for refresh.
+Speaker B: Key changes needed: AI clauses, data processing addendum, force majeure.
+Speaker A: Decision: external counsel will draft new template by April 30th.
+Speaker C: Budget approved for outside counsel, 15k.
+Speaker B: All new contracts after May 1st use the new template.
+"""
+    },
+    {
+        "id": "legal_2024_04_15_ip_policy",
+        "domain": "legal",
+        "date": "2024-04-15",
+        "title": "IP Policy for AI-Generated Content",
+        "text": """
+Speaker A: We need policy on AI-generated work. Employees asking questions.
+Speaker B: Current copyright law is ambiguous for AI output.
+Speaker A: Decision: any AI-assisted work must be reviewed and approved by human author.
+Speaker C: All AI tools require approval from legal before use on client work.
+Speaker A: Training session for all employees by end of May.
+"""
+    },
+
+    # --- SALES ---
+    {
+        "id": "sales_2024_01_25_q1_targets",
+        "domain": "sales",
+        "date": "2024-01-25",
+        "title": "Q1 Sales Targets",
+        "text": """
+Speaker A: Q1 target is 1.2M in new ARR.
+Speaker B: Pipeline currently at 3.5M weighted. Looks healthy.
+Speaker C: Enterprise team has 4 deals over 100k in late stage.
+Speaker A: Decision: focus on upmarket deals — better margins.
+Speaker B: New SDR starting February 1st. Will help with outbound.
+Speaker A: Commissions accelerator kicks in at 110 percent of quota.
+"""
+    },
+    {
+        "id": "sales_2024_03_30_q1_review",
+        "domain": "sales",
+        "date": "2024-03-30",
+        "title": "Q1 Sales Review",
+        "text": """
+Speaker A: Q1 closed. 1.35M ARR, 112 percent of target.
+Speaker B: Three of four enterprise deals closed.
+Speaker C: One deal slipped to Q2 — procurement delay.
+Speaker A: Win rate 28 percent, up from 22 percent last quarter.
+Speaker B: Lost deal analysis — pricing was main objection in 4 of 7 losses.
+Speaker A: Decision: revise pricing tiers for SMB segment by April 15th.
+"""
+    },
+    {
+        "id": "sales_2024_05_20_competitive_analysis",
+        "domain": "sales",
+        "date": "2024-05-20",
+        "title": "Competitive Analysis Update",
+        "text": """
+Speaker A: New competitor entering our space. Funded series A.
+Speaker B: Their pricing is 30 percent below us. Faster setup time.
+Speaker C: Our advantage is enterprise security features.
+Speaker A: Decision: create battle card by next Friday.
+Speaker B: Sales engineering trains team on new positioning.
+Speaker A: We'll add competitive intelligence to weekly sales standup.
+"""
+    },
+
+    # --- FINANCE ---
+    {
+        "id": "finance_2024_01_10_budget_planning",
+        "domain": "finance",
+        "date": "2024-01-10",
+        "title": "2024 Budget Planning",
+        "text": """
+Speaker A: Annual budget review. Revenue projection 5.5M.
+Speaker B: Engineering wants 2.2M, sales 1.8M, marketing 800k.
+Speaker A: Decision: approved as proposed, with 5 percent contingency reserve.
+Speaker C: Cash runway 18 months at current burn.
+Speaker A: Quarterly budget reviews going forward, not annual only.
+"""
+    },
+    {
+        "id": "finance_2024_04_10_q1_close",
+        "domain": "finance",
+        "date": "2024-04-10",
+        "title": "Q1 Financial Close",
+        "text": """
+Speaker A: Q1 numbers final. Revenue 1.4M, slightly above plan.
+Speaker B: Burn rate 380k per month, within budget.
+Speaker C: AR aging is concerning — 90k over 60 days.
+Speaker A: Decision: implement net 30 terms for new customers, was net 60.
+Speaker B: Collections cycle should improve by 15 days.
+Speaker A: Audit prep starts next month for annual review.
+"""
+    },
+    {
+        "id": "finance_2024_06_25_funding_strategy",
+        "domain": "finance",
+        "date": "2024-06-25",
+        "title": "Series B Funding Strategy",
+        "text": """
+Speaker A: Series B planning. Targeting close in Q4.
+Speaker B: Three VCs expressed interest after recent metrics.
+Speaker C: We need 24 months of runway in projections.
+Speaker A: Target raise 15M at 80M post.
+Speaker B: Decision: hire investment banker to run process — David handles selection.
+Speaker A: Data room preparation starts in July.
+"""
+    },
+
+    # --- CUSTOMER SUPPORT ---
+    {
+        "id": "support_2024_02_20_ticket_volume",
+        "domain": "support",
+        "date": "2024-02-20",
+        "title": "Ticket Volume Review",
+        "text": """
+Speaker A: Ticket volume up 40 percent month over month.
+Speaker B: Most tickets are about new dashboard — confusion on navigation.
+Speaker C: First response time degraded to 6 hours, target is 4.
+Speaker A: Decision: invest in self-service knowledge base.
+Speaker B: Two support engineers starting next month, will reduce load.
+Speaker A: Product team creates in-app tutorials by end of March.
+"""
+    },
+    {
+        "id": "support_2024_04_25_csat_improvement",
+        "domain": "support",
+        "date": "2024-04-25",
+        "title": "CSAT Improvement Plan",
+        "text": """
+Speaker A: CSAT dropped to 72 percent. Target is 85 percent.
+Speaker B: Main complaints are slow resolution and lack of follow-up.
+Speaker C: We're implementing case ownership model.
+Speaker A: Decision: every case has named owner end to end.
+Speaker B: 24-hour follow-up rule on all resolved cases.
+Speaker A: Mike rolls this out, expects CSAT recovery in 6 weeks.
+"""
+    },
+    {
+        "id": "support_2024_06_05_ai_chatbot",
+        "domain": "support",
+        "date": "2024-06-05",
+        "title": "AI Chatbot Pilot Review",
+        "text": """
+Speaker A: 30 days into AI chatbot pilot.
+Speaker B: 35 percent of tickets resolved without human escalation.
+Speaker C: User satisfaction with bot interactions is 78 percent.
+Speaker A: Some edge cases still need work — billing questions especially.
+Speaker B: Decision: continue rollout, expand to billing in Q3.
+Speaker A: Project ROI looks strong — 200k annualized savings.
+"""
+    },
+
+    # --- BACKLOG / OTHER ENGINEERING ---
+    {
+        "id": "eng_2024_05_10_api_v2",
+        "domain": "engineering",
+        "date": "2024-05-10",
+        "title": "API v2 Planning",
+        "text": """
+Speaker A: Time to plan API v2. Current API has scaling issues.
+Speaker B: GraphQL migration partial, completing it makes sense.
+Speaker C: Versioning strategy — header-based or URL-based?
+Speaker A: Decision: URL-based versioning, cleaner for clients.
+Speaker B: Deprecation policy — v1 supported 12 months after v2 launch.
+Speaker A: First v2 endpoints in beta by August.
+"""
+    },
+    {
+        "id": "eng_2024_06_15_observability",
+        "domain": "engineering",
+        "date": "2024-06-15",
+        "title": "Observability Stack Review",
+        "text": """
+Speaker A: Current monitoring spread across 4 tools. Too fragmented.
+Speaker B: Datadog covers most needs. Sentry for errors. Costs 4k per month.
+Speaker C: Decision: consolidate to Datadog. Decommission others by August.
+Speaker B: Estimated savings 1.5k per month.
+Speaker A: Need to migrate dashboards — Alex owns by July 20th.
+"""
+    },
+    {
+        "id": "eng_2024_07_01_security_incident",
+        "domain": "engineering",
+        "date": "2024-07-01",
+        "title": "Security Incident Post-Mortem",
+        "text": """
+Speaker A: Last week's incident — auth token leak in logs.
+Speaker B: Root cause: debug logging enabled in production for one hour.
+Speaker C: All tokens rotated, no evidence of misuse.
+Speaker A: Decision: log scrubbing required for all sensitive fields.
+Speaker B: Production debug logging requires VP approval going forward.
+Speaker A: We'll add this to security training for all engineers.
+"""
+    },
+
+
 ]
 
 print(f"Loading {len(MEETINGS)} meetings into ChromaDB...")

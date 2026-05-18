@@ -10,6 +10,25 @@ st.set_page_config(
     layout="wide"
 )
 
+st.markdown("""
+<style>
+    .stApp {
+        background: linear-gradient(180deg, #0F172A 0%, #1E1B4B 100%);
+    }
+    .stButton button {
+        border-radius: 8px;
+        font-weight: 600;
+    }
+    [data-testid="stMetricValue"] {
+        font-size: 2rem;
+        color: #A78BFA;
+    }
+    h1, h2, h3 {
+        color: #F1F5F9;
+    }
+</style>
+""", unsafe_allow_html=True)
+
 st.title("🎤 Meeting Assistant")
 st.caption("Multi-agent system for meeting analysis, action tracking, and follow-ups")
 
