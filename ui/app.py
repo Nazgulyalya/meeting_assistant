@@ -149,6 +149,16 @@ if "result" in st.session_state:
     # --- Tab 4: Email Draft ---
     with tab4:
         st.subheader("Follow-up Email Draft")
+        with st.expander("🔌 MCP Connection Status"):
+            try:
+                from mcp_client.client import list_mcp_tools
+                tools = list_mcp_tools()
+                st.success(f"✅ Connected to MCP server with {len(tools)} tools:")
+                for t in tools:
+                    st.markdown(f"- **{t['name']}**: {t['description'][:80]}")
+            except Exception as e:
+                st.error(f"MCP connection error: {e}")
+
         st.text_input("Subject", value=synthesis.email_subject, key="email_subject")
         email_body = st.text_area("Body", value=synthesis.email_body, height=300, key="email_body")
 
@@ -166,7 +176,7 @@ if "result" in st.session_state:
                 st.error("Please enter an email address.")
             else:
                 with st.spinner("Sending email..."):
-                    from mcp.gmail_client import send_email
+                    from mcp_client.client import send_email_via_mcp as send_email
                     result_send = send_email(
                         to=to_email,
                         subject=st.session_state["email_subject"],
@@ -190,7 +200,7 @@ if "result" in st.session_state:
 
         if cal_btn:
             with st.spinner("Creating event..."):
-                from mcp.calendar_client import create_event
+                from mcp_client.client import create_event_via_mcp as create_event
                 from datetime import datetime, timedelta
                 start_dt = datetime.combine(followup_date, followup_time).isoformat()
                 end_dt = datetime.combine(

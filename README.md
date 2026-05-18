@@ -39,7 +39,10 @@ flowchart LR
     TA --> MA[Memory Agent<br/>RAG]
     MA --> AA[Action Agent]
     AA --> SA[Synthesis Agent]
-    SA --> MCP[Gmail / Calendar MCP]
+    SA --> Client[MCP Client]
+    Client -->|JSON-RPC stdio| Server[Custom MCP Server]
+    Server --> Gmail[Gmail API]
+    Server --> Cal[Calendar API]
     
     DB[(ChromaDB<br/>30 meetings)] <--> MA
     

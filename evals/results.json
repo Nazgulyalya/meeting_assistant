@@ -3,7 +3,7 @@
     "evaluated_queries": 10,
     "avg_precision_at_5": 0.28,
     "avg_recall_at_5": 1.0,
-    "mean_reciprocal_rank": 0.548
+    "mean_reciprocal_rank": 0.507
   },
   "details": [
     {
@@ -13,10 +13,10 @@
       ],
       "retrieved": [
         "eng_2024_03_20_post_launch",
-        "hr_2024_04_05_remote_policy",
-        "design_2024_04_20_rollout",
-        "mkt_2024_04_15_campaign_review",
-        "eng_2024_01_15_q1_planning"
+        "support_2024_02_20_ticket_volume",
+        "sales_2024_01_25_q1_targets",
+        "eng_2024_06_15_observability",
+        "design_2024_04_20_rollout"
       ],
       "precision": 0.2,
       "recall": 1.0,
@@ -29,15 +29,15 @@
         "eng_2024_02_01_dashboard_review"
       ],
       "retrieved": [
-        "meeting_20260517_225808_03f80d",
-        "meeting_20260517_230500_50e79c",
-        "meeting_20260517_173046_f818b0",
+        "legal_2024_03_20_contract_template",
         "eng_2024_02_01_dashboard_review",
+        "meeting_20260518_193552_86cd3a",
+        "meeting_20260518_200941_2ea2b2",
         "eng_2024_01_15_q1_planning"
       ],
       "precision": 0.4,
       "recall": 1.0,
-      "mrr": 0.25
+      "mrr": 0.5
     },
     {
       "query": "security audit and authentication tokens",
@@ -45,15 +45,15 @@
         "eng_2024_02_15_security_review"
       ],
       "retrieved": [
-        "mkt_2024_02_05_campaign_kickoff",
-        "design_2024_03_05_concept_review",
-        "design_2024_02_10_brand_refresh",
-        "eng_2024_02_01_dashboard_review",
-        "eng_2024_02_15_security_review"
+        "legal_2024_02_10_gdpr_review",
+        "meeting_20260518_193552_86cd3a",
+        "eng_2024_07_01_security_incident",
+        "eng_2024_02_15_security_review",
+        "legal_2024_04_15_ip_policy"
       ],
       "precision": 0.2,
       "recall": 1.0,
-      "mrr": 0.2
+      "mrr": 0.25
     },
     {
       "query": "spring marketing campaign budget allocation",
@@ -61,42 +61,42 @@
         "mkt_2024_02_05_campaign_kickoff"
       ],
       "retrieved": [
+        "sales_2024_05_20_competitive_analysis",
+        "finance_2024_06_25_funding_strategy",
         "hr_2024_06_10_team_offsite",
-        "mkt_2024_02_05_campaign_kickoff",
-        "mkt_2024_03_10_campaign_progress",
-        "design_2024_03_05_concept_review",
-        "eng_2024_02_01_dashboard_review"
+        "finance_2024_01_10_budget_planning",
+        "mkt_2024_02_05_campaign_kickoff"
       ],
       "precision": 0.2,
       "recall": 1.0,
-      "mrr": 0.5
+      "mrr": 0.2
     },
     {
       "query": "email open rates and conversion targets",
       "expected": [
-        "mkt_2024_02_05_campaign_kickoff",
-        "mkt_2024_04_15_campaign_review"
+        "mkt_2024_04_15_campaign_review",
+        "mkt_2024_02_05_campaign_kickoff"
       ],
       "retrieved": [
-        "hr_2024_06_10_team_offsite",
-        "mkt_2024_02_05_campaign_kickoff",
-        "mkt_2024_03_10_campaign_progress",
         "mkt_2024_04_15_campaign_review",
-        "hr_2024_03_15_hiring_review"
+        "finance_2024_06_25_funding_strategy",
+        "sales_2024_03_30_q1_review",
+        "sales_2024_01_25_q1_targets",
+        "mkt_2024_02_05_campaign_kickoff"
       ],
       "precision": 0.4,
       "recall": 1.0,
-      "mrr": 0.5
+      "mrr": 1.0
     },
     {
       "query": "brand refresh and new logo design",
       "expected": [
-        "design_2024_03_05_concept_review",
-        "design_2024_02_10_brand_refresh"
+        "design_2024_02_10_brand_refresh",
+        "design_2024_03_05_concept_review"
       ],
       "retrieved": [
-        "mkt_2024_02_05_campaign_kickoff",
-        "mkt_2024_03_10_campaign_progress",
+        "sales_2024_05_20_competitive_analysis",
+        "legal_2024_03_20_contract_template",
         "design_2024_03_05_concept_review",
         "design_2024_02_10_brand_refresh",
         "design_2024_04_20_rollout"
@@ -108,19 +108,19 @@
     {
       "query": "engineering hiring plan and time to hire",
       "expected": [
-        "hr_2024_01_20_hiring_plan",
-        "hr_2024_03_15_hiring_review"
+        "hr_2024_03_15_hiring_review",
+        "hr_2024_01_20_hiring_plan"
       ],
       "retrieved": [
-        "hr_2024_06_10_team_offsite",
-        "hr_2024_01_20_hiring_plan",
         "hr_2024_04_05_remote_policy",
-        "eng_2024_02_01_dashboard_review",
-        "hr_2024_03_15_hiring_review"
+        "finance_2024_06_25_funding_strategy",
+        "hr_2024_03_15_hiring_review",
+        "hr_2024_06_10_team_offsite",
+        "hr_2024_01_20_hiring_plan"
       ],
       "precision": 0.4,
       "recall": 1.0,
-      "mrr": 0.5
+      "mrr": 0.33
     },
     {
       "query": "remote work policy and flexible schedule",
@@ -128,15 +128,15 @@
         "hr_2024_04_05_remote_policy"
       ],
       "retrieved": [
+        "hr_2024_04_05_remote_policy",
+        "legal_2024_02_10_gdpr_review",
         "hr_2024_06_10_team_offsite",
-        "meeting_20260517_225808_03f80d",
-        "meeting_20260517_230500_50e79c",
-        "meeting_20260517_173046_f818b0",
-        "hr_2024_04_05_remote_policy"
+        "meeting_20260518_200941_2ea2b2",
+        "legal_2024_04_15_ip_policy"
       ],
       "precision": 0.2,
       "recall": 1.0,
-      "mrr": 0.2
+      "mrr": 1.0
     },
     {
       "query": "compensation review and salary adjustments",
@@ -144,15 +144,15 @@
         "hr_2024_05_15_compensation_review"
       ],
       "retrieved": [
+        "finance_2024_04_10_q1_close",
+        "hr_2024_03_15_hiring_review",
+        "finance_2024_01_10_budget_planning",
         "hr_2024_05_15_compensation_review",
-        "hr_2024_01_20_hiring_plan",
-        "hr_2024_04_05_remote_policy",
-        "design_2024_02_10_brand_refresh",
-        "hr_2024_03_15_hiring_review"
+        "hr_2024_01_20_hiring_plan"
       ],
       "precision": 0.2,
       "recall": 1.0,
-      "mrr": 1.0
+      "mrr": 0.25
     },
     {
       "query": "team offsite planning and venue",
@@ -160,15 +160,15 @@
         "hr_2024_06_10_team_offsite"
       ],
       "retrieved": [
-        "hr_2024_06_10_team_offsite",
-        "design_2024_03_05_concept_review",
+        "sales_2024_05_20_competitive_analysis",
         "hr_2024_04_05_remote_policy",
-        "design_2024_04_20_rollout",
-        "eng_2024_02_01_dashboard_review"
+        "design_2024_03_05_concept_review",
+        "finance_2024_06_25_funding_strategy",
+        "hr_2024_06_10_team_offsite"
       ],
       "precision": 0.2,
       "recall": 1.0,
-      "mrr": 1.0
+      "mrr": 0.2
     }
   ]
 }
