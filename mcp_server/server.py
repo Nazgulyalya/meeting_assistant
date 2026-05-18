@@ -11,6 +11,7 @@ import base64
 import re
 import pickle
 from email.mime.text import MIMEText
+from tzlocal import get_localzone_name
 
 # Make sure project root is in path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -69,7 +70,7 @@ def send_email(to: str, subject: str, body: str) -> dict:
         )
         service = build("gmail", "v1", credentials=creds)
 
-        msg = MIMEText(body)
+        msg = MIMEText(body, "plain", "utf-8")
         msg["to"] = to
         msg["subject"] = subject
         raw = base64.urlsafe_b64encode(msg.as_bytes()).decode()
@@ -108,13 +109,15 @@ def create_calendar_event(
         )
         service = build("calendar", "v3", credentials=creds)
 
+        local_tz = get_localzone_name()  # автоматически берёт твой часовой пояс
         event = {
             "summary": title,
             "description": description,
-            "start": {"dateTime": start, "timeZone": "UTC"},
-            "end": {"dateTime": end, "timeZone": "UTC"},
+            "start": {"dateTime": start, "timeZone": local_tz},
+            "end": {"dateTime": end, "timeZone": local_tz},
             "attendees": [{"email": e.strip()} for e in attendees if e.strip()]
         }
+        
         service.events().insert(calendarId="primary", body=event).execute()
         return {"success": True, "error": None}
     except Exception as e:
